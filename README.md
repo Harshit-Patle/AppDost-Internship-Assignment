@@ -140,6 +140,22 @@ Notes
 - Ensure server env `JWT_SECRET` and `MONGO_URI` are set in your hosting provider.
 - If serving client and server from different origins, keep CORS enabled on the API (it is by default).
 
+### Deploying the frontend to Vercel
+
+This repo is a monorepo; the frontend lives in `client/`.
+
+1. Push the repo to GitHub (already done).
+2. In Vercel, import your GitHub repo and set the project root to `client/`.
+3. Framework Preset: Vite. Build Command: `npm run build`. Output: `dist/`.
+4. Add Environment Variables in Vercel Project Settings:
+  - `VITE_API_BASE_URL` = https://your-api-domain.tld (your Express server origin)
+  - `VITE_API_PREFIX` = /api (optional; defaults to `/api`)
+5. Save and Deploy.
+
+Notes
+- A `client/vercel.json` is included with a SPA rewrite so deep links (e.g., `/feed`, `/profile`) work.
+- API calls go to `VITE_API_BASE_URL` so they are not affected by the SPA rewrite.
+
 ## Troubleshooting
 
 - 401/403 errors: verify the `Authorization: Bearer <token>` header is sent from the client services.
