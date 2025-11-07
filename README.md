@@ -2,6 +2,20 @@
 
 A minimal LinkedIn-style social feed built with React + Vite (client) and Node.js/Express + MongoDB (server). The UI is preserved from the original design while adding core social features and mobile polish.
 
+## Live Demo
+
+- Frontend: https://app-dost-internship-assignment.vercel.app
+- Backend (API Base): https://app-dost-internship-assignment-h9uj.vercel.app
+
+In production set:
+
+```
+VITE_API_BASE_URL=https://app-dost-internship-assignment-h9uj.vercel.app
+VITE_API_PREFIX=/api
+```
+
+Example full API URL: `https://app-dost-internship-assignment-h9uj.vercel.app/api/posts`
+
 ## Features
 
 - Auth: sign up, log in, JWT-protected routes
