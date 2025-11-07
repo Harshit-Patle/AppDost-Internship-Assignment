@@ -156,6 +156,40 @@ Notes
 - A `client/vercel.json` is included with a SPA rewrite so deep links (e.g., `/feed`, `/profile`) work.
 - API calls go to `VITE_API_BASE_URL` so they are not affected by the SPA rewrite.
 
+### Deploying the backend to Render
+
+You can deploy the Express API to Render using the included `render.yaml` blueprint.
+
+Option A – Auto (Blueprint)
+1. Commit & push the `render.yaml` at repo root.
+2. In Render dashboard: New + Blueprint Deploy → pick your repo.
+3. Render detects `render.yaml` and creates a web service named `linkedin-clone-api`.
+4. Set environment variables (click each placeholder marked sync: false):
+  - `MONGO_URI` – your MongoDB connection string.
+  - `JWT_SECRET` – a strong random string.
+  - (Optional) adjust `PORT` if needed (defaults to 5000).
+5. Deploy; health check should return "LinkedIn Clone API is running!" at `/`.
+
+Option B – Manual
+1. New Web Service → select repo.
+2. Root Directory: `server`
+3. Runtime: Node
+4. Build Command: `npm install`
+5. Start Command: `npm start`
+6. Add env vars: `MONGO_URI`, `JWT_SECRET`, `PORT=5000`.
+7. Create & Deploy.
+
+After Deploy
+- Note the Render service URL (e.g., `https://linkedin-clone-api.onrender.com`).
+- Set `VITE_API_BASE_URL` in your Vercel frontend environment to this URL.
+- Redeploy the frontend so it uses the live API.
+
+Troubleshooting Render
+- Stuck in build: ensure Node version is supported (can add `engines` in `server/package.json`).
+- 500 errors: tail logs; confirm Mongo URI credentials & network access.
+- CORS blocked: `cors()` middleware is already enabled; verify you're hitting the correct origin.
+- Large image uploads failing: confirm the JSON limit (`5mb`) is sufficient or reduce image size.
+
 ## Troubleshooting
 
 - 401/403 errors: verify the `Authorization: Bearer <token>` header is sent from the client services.
