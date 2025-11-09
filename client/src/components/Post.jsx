@@ -157,10 +157,12 @@ const Post = ({ post, onPostUpdated }) => {
                         )}
                         {post.image && (
                             <div
-                                className="mb-4 rounded-lg overflow-hidden cursor-pointer hover:opacity-95 transition-opacity"
+                                className="mb-4 rounded-lg bg-gray-50 cursor-pointer hover:opacity-95 transition-opacity"
                                 onClick={() => setShowFullImage(true)}
                             >
-                                <img src={post.image} alt="Post content" className="w-full max-h-96 object-cover" />
+                                <div className="w-full max-h-96 flex items-center justify-center overflow-hidden rounded-lg">
+                                    <img src={post.image} alt="Post content" className="max-h-96 max-w-full object-contain" />
+                                </div>
                             </div>
                         )}
                     </>
