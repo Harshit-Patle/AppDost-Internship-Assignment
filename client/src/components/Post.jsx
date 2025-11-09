@@ -39,7 +39,6 @@ const Post = ({ post, onPostUpdated }) => {
                     </div>
                     <div className="flex-1 min-w-0">
                         <h3 className="font-semibold text-gray-900">{post.author.name}</h3>
-                        <p className="text-sm text-gray-600">{post.author.title}</p>
                         <p className="text-xs text-gray-500">{timeAgo(post.createdAt)}</p>
                     </div>
                     {isPostOwner && !isEditing && (
